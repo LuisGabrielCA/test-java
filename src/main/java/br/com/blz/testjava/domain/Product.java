@@ -1,4 +1,4 @@
-package br.com.blz.testjava.model;
+package br.com.blz.testjava.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

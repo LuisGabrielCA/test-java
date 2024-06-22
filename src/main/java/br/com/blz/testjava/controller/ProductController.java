@@ -1,6 +1,6 @@
 package br.com.blz.testjava.controller;
 
-import br.com.blz.testjava.model.Product;
+import br.com.blz.testjava.domain.Product;
 import br.com.blz.testjava.service.ProductService;
 
 import org.springframework.http.HttpStatus;

@@ -1,9 +1,10 @@
 package br.com.blz.testjava.service;
 
+import br.com.blz.testjava.domain.Inventory;
+import br.com.blz.testjava.domain.Product;
+import br.com.blz.testjava.domain.Warehouse;
 import br.com.blz.testjava.exception.ProductNotFoundException;
-import br.com.blz.testjava.model.Inventory;
-import br.com.blz.testjava.model.Product;
-import br.com.blz.testjava.model.Warehouse;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

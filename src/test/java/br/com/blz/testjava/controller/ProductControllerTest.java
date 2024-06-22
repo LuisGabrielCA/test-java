@@ -1,8 +1,8 @@
 package br.com.blz.testjava.controller;
 
-import br.com.blz.testjava.model.Inventory;
-import br.com.blz.testjava.model.Product;
-import br.com.blz.testjava.model.Warehouse;
+import br.com.blz.testjava.domain.Inventory;
+import br.com.blz.testjava.domain.Product;
+import br.com.blz.testjava.domain.Warehouse;
 import br.com.blz.testjava.service.ProductService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
