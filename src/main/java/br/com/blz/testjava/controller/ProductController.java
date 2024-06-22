@@ -30,9 +30,9 @@ public class ProductController {
     }
 
     @PutMapping("/{sku}")
-    public ResponseEntity<Product> updateProduct(@PathVariable long sku, @RequestBody Product product) {
-        Product updatedProduct = productService.updateProduct(sku, product);
-        return ResponseEntity.status(HttpStatus.OK).body(updatedProduct);
+    public ResponseEntity<Void> updateProduct(@PathVariable long sku, @RequestBody Product product) {
+        productService.updateProduct(sku, product);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @DeleteMapping("/{sku}")

@@ -22,6 +22,13 @@ public class ProductService {
             throw new ProductAlreadyCreatedException();
         }
         productMap.put(sku, product);
+
+        int totalQuantity = calculateTotalQuantity(product.getInventory());
+        product.getInventory().setQuantity(totalQuantity);
+
+        boolean isMarketable = isProductMarketable(product);
+        product.setMarketable(isMarketable);
+
         return product;
     }
 
