@@ -21,27 +21,20 @@ public class ProductService {
         if (productMap.containsKey(sku)) {
             throw new ProductAlreadyCreatedException();
         }
+
+        updateProductInventory(product);
         productMap.put(sku, product);
-
-        int totalQuantity = calculateTotalQuantity(product.getInventory());
-        product.getInventory().setQuantity(totalQuantity);
-
-        boolean isMarketable = isProductMarketable(product);
-        product.setMarketable(isMarketable);
 
         return product;
     }
 
     public Product getProductBySkuId(long sku) {
-        Product product = productMap.get(sku);
         if (!productMap.containsKey(sku)) {
-                throw new ProductNotFoundException();
+            throw new ProductNotFoundException();
         }
-        int totalQuantity = calculateTotalQuantity(product.getInventory());
-        product.getInventory().setQuantity(totalQuantity);
 
-        boolean isMarketable = isProductMarketable(product);
-        product.setMarketable(isMarketable);
+        Product product = productMap.get(sku);
+        updateProductInventory(product);
 
         return product;
     }
@@ -50,8 +43,12 @@ public class ProductService {
         if (!productMap.containsKey(sku)) {
             throw new ProductNotFoundException();
         }
+
         product.setSku(sku);
         productMap.put(sku, product);
+
+        updateProductInventory(product);
+
         return product;
     }
 
@@ -60,6 +57,13 @@ public class ProductService {
             throw new ProductNotFoundException();
         }
         productMap.remove(sku);
+    }
+
+    private void updateProductInventory(Product product) {
+        int totalQuantity = calculateTotalQuantity(product.getInventory());
+        product.getInventory().setQuantity(totalQuantity);
+        boolean isMarketable = isProductMarketable(product);
+        product.setMarketable(isMarketable);
     }
 
     private boolean isProductMarketable(Product product) {

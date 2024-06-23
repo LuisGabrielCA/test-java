@@ -75,15 +75,15 @@ public class ProductControllerTest {
                         createWarehouse("MOEMA", 3, "PHYSICAL_STORE")
                 ));
         productService.createProduct(product);
-
+    
         product.setName("Updated Product Name");
-
+    
         mockMvc.perform(MockMvcRequestBuilders.put("/products/{sku}", sku)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(product)))
-                .andExpect(MockMvcResultMatchers.status().isNoContent())
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(print());
-
+    
         mockMvc.perform(MockMvcRequestBuilders.get("/products/{sku}", sku))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Updated Product Name"))
