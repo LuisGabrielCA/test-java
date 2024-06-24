@@ -7,6 +7,8 @@ import br.com.blz.testjava.exception.ProductAlreadyCreatedException;
 import br.com.blz.testjava.exception.ProductNotFoundException;
 import br.com.blz.testjava.exception.SkuFieldIsRequiredException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -15,16 +17,20 @@ import java.util.Map;
 @Service
 public class ProductService {
 
+    private static final Logger logger = LoggerFactory.getLogger(ProductService.class);
+
     private Map<Long, Product> productMap = new HashMap<>();
 
     public Product createProduct(Product product) {
         long sku = product.getSku();
 
         if (sku == 0) {
+            logger.error("SKU field is required");
             throw new SkuFieldIsRequiredException();
         }
 
         if (productMap.containsKey(sku)) {
+            logger.error("Product with sku {} already exists", sku);
             throw new ProductAlreadyCreatedException();
         }
 
@@ -36,6 +42,7 @@ public class ProductService {
 
     public Product getProductBySkuId(long sku) {
         if (!productMap.containsKey(sku)) {
+            logger.error("Product with sku {} not found", sku);
             throw new ProductNotFoundException();
         }
 
@@ -47,6 +54,7 @@ public class ProductService {
 
     public Product updateProduct(long sku, Product product) {
         if (!productMap.containsKey(sku)) {
+            logger.error("Product with sku {} not found", sku);
             throw new ProductNotFoundException();
         }
 
@@ -60,6 +68,7 @@ public class ProductService {
 
     public void deleteProduct(long sku) {
         if (!productMap.containsKey(sku)) {
+            logger.error("Product with sku {} not found", sku);
             throw new ProductNotFoundException();
         }
         productMap.remove(sku);
