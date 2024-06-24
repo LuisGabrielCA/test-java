@@ -30,6 +30,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBody);
     }
 
+    @ExceptionHandler(SkuFieldIsRequiredException.class)
+    public ResponseEntity<Object> handleSkuFieldIsRequiredException(SkuFieldIsRequiredException exception) {
+        Map<String, String> responseBody = new HashMap<>();
+        responseBody.put("message", exception.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
+    }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception,
             HttpHeaders headers, HttpStatus status, WebRequest request) {

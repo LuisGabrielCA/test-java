@@ -5,6 +5,7 @@ import br.com.blz.testjava.domain.Product;
 import br.com.blz.testjava.domain.Warehouse;
 import br.com.blz.testjava.exception.ProductAlreadyCreatedException;
 import br.com.blz.testjava.exception.ProductNotFoundException;
+import br.com.blz.testjava.exception.SkuFieldIsRequiredException;
 
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,11 @@ public class ProductService {
 
     public Product createProduct(Product product) {
         long sku = product.getSku();
+
+        if (sku == 0) {
+            throw new SkuFieldIsRequiredException();
+        }
+
         if (productMap.containsKey(sku)) {
             throw new ProductAlreadyCreatedException();
         }
