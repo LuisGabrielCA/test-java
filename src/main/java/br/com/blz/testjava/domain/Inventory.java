@@ -2,8 +2,14 @@ package br.com.blz.testjava.domain;
 
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+
 public class Inventory {
     private int quantity;
+
+    @Valid
+    @NotEmpty(message = "warehouses list must not be empty")
     private List<Warehouse> warehouses;
 
     public int getQuantity() {

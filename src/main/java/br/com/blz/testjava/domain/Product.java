@@ -3,9 +3,18 @@ package br.com.blz.testjava.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class Product {
     private long sku;
+
+    @NotEmpty(message = "name field is required")
     private String name;
+
+    @Valid
+    @NotNull(message = "inventory is required")
     private Inventory inventory;
 
     @JsonProperty("isMarketable")
